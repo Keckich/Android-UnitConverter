@@ -14,25 +14,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("MainActivity", "HelloWorld");
     }
 
     public void launchDistanceActivity(View view) {
         Intent intent = new Intent(this, DistanceActivity.class);
         startActivity(intent);
-        Log.d(LOG_TAG, "Button clicked");
     }
 
     public void launchTemperatureActivity(View view) {
         Intent intent = new Intent(this, TemperatureActivity.class);
         startActivity(intent);
-        Log.d(LOG_TAG, "Button clicked");
     }
 
     public void launchWeightActivity(View view) {
         Intent intent = new Intent(this, WeightActivity.class);
         startActivity(intent);
-        Log.d(LOG_TAG, "Button clicked");
     }
 
     public void launchCurrencyActivity(View view) {
