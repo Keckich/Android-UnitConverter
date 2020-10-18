@@ -9,31 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".TemperatureActivity"
-            android:label="Temperature"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myapplication.MainActivity" />
-        </activity>
-        <activity android:name=".CurrencyActivity"
-            android:label="Currency"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myapplication.MainActivity" />
-        </activity>
-        <activity android:name=".WeightActivity"
-            android:label="Weight"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myapplication.MainActivity" />
-        </activity>
-        <activity
-            android:name=".DistanceActivity"
-            android:label="Distance"
+        <activity android:name=".ContentActivity"
+            android:label="Converter"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

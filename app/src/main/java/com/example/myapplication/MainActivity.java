@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,22 +18,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchDistanceActivity(View view) {
-        Intent intent = new Intent(this, DistanceActivity.class);
+        Intent intent = new Intent(this, ContentActivity.class);
+        Button button = (Button)view;
+        intent.putExtra("unitName", String.valueOf(button.getText()));
         startActivity(intent);
     }
 
     public void launchTemperatureActivity(View view) {
-        Intent intent = new Intent(this, TemperatureActivity.class);
+        Intent intent = new Intent(this, ContentActivity.class);
+        Button button = (Button)view;
+        intent.putExtra("unitName", String.valueOf(button.getText()));
         startActivity(intent);
     }
 
     public void launchWeightActivity(View view) {
-        Intent intent = new Intent(this, WeightActivity.class);
+        Intent intent = new Intent(this, ContentActivity.class);
+        Button button = (Button)view;
+        intent.putExtra("unitName", String.valueOf(button.getText()));
         startActivity(intent);
     }
 
     public void launchCurrencyActivity(View view) {
-        Intent intent = new Intent(this, CurrencyActivity.class);
+        Intent intent = new Intent(this, ContentActivity.class);
+        Button button = (Button)view;
+        intent.putExtra("unitName", String.valueOf(button.getText()));
         startActivity(intent);
         Log.d(LOG_TAG, "Button clicked");
     }

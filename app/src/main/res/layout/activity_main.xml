@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="237dp"
-        android:text="Currency"
+        android:text="@string/currency"
         android:onClick="launchCurrencyActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,7 +25,7 @@
         android:layout_marginStart="196dp"
         android:layout_marginLeft="196dp"
         android:layout_marginBottom="472dp"
-        android:text="Wieght"
+        android:text="@string/weight"
         android:onClick="launchWeightActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -37,7 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="472dp"
-        android:text="Distance"
+        android:text="@string/distance"
         android:onClick="launchDistanceActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,7 +49,7 @@
         android:layout_marginStart="196dp"
         android:layout_marginLeft="196dp"
         android:layout_marginBottom="236dp"
-        android:text="Temperature"
+        android:text="@string/temperature"
         android:onClick="launchTemperatureActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
