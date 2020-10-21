@@ -19,5 +19,6 @@
     <string name="weight">Weight</string>
     <string name="distance">Distance</string>
     <string name="temperature">Temperature</string>
+    <string name="todo">TODO</string>
 
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -93,6 +94,15 @@ public class CurrFragment2 extends Fragment {
         };
         View view = inflater.inflate(R.layout.fragment_curr2, container, false);
         model = new ViewModelProvider(requireActivity()).get(DataViewModel.class);
+        final Observer<String> value = new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (!s.equals("")) {
+                    input = s;
+                }
+            }
+        };
+        model.getInput().observe(getViewLifecycleOwner(), value);
         Button[] b = new Button[11];
         for (int i = 0; i < 11; i++) {
             b[i] = view.findViewById(buttonsId[i]);
@@ -110,8 +120,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "1";
         }
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b10Click() {
@@ -123,8 +132,7 @@ public class CurrFragment2 extends Fragment {
             }
         }
         dot = true;
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b9Click() {
@@ -134,9 +142,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "9";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b8Click() {
@@ -146,9 +152,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "8";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b7Click() {
@@ -158,9 +162,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "7";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b6Click() {
@@ -170,9 +172,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "6";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b5Click() {
@@ -182,9 +182,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "5";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b4Click() {
@@ -194,9 +192,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "4";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b2Click() {
@@ -206,9 +202,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "2";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b3Click() {
@@ -218,9 +212,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "3";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void b11Click() {
@@ -230,9 +222,7 @@ public class CurrFragment2 extends Fragment {
         else {
             input += "0";
         }
-
-        //mListener.onFragmentInteraction(input);
-        model.select(input);
+        model.setInput(input);
     }
 
     public void delete() {
@@ -241,8 +231,7 @@ public class CurrFragment2 extends Fragment {
             if (!input.contains(".")) {
                 dot = false;
             }
-            //mListener.onFragmentInteraction(input);
-            model.select(input);
+            model.setInput(input);
         }
     }
 }

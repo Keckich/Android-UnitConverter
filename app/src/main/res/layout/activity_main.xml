@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A7CCD1"
     tools:context=".MainActivity">
 
     <Button
@@ -13,8 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="237dp"
-        android:text="@string/currency"
         android:onClick="launchCurrencyActivity"
+        android:text="@string/currency"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -25,8 +26,8 @@
         android:layout_marginStart="196dp"
         android:layout_marginLeft="196dp"
         android:layout_marginBottom="472dp"
-        android:text="@string/weight"
         android:onClick="launchWeightActivity"
+        android:text="@string/weight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,8 +38,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="472dp"
-        android:text="@string/distance"
         android:onClick="launchDistanceActivity"
+        android:text="@string/distance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -49,8 +50,8 @@
         android:layout_marginStart="196dp"
         android:layout_marginLeft="196dp"
         android:layout_marginBottom="236dp"
-        android:text="@string/temperature"
         android:onClick="launchTemperatureActivity"
+        android:text="@string/temperature"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
