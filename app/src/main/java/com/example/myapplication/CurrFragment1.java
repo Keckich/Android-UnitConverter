@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,9 +78,7 @@ public class CurrFragment1 extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     public void content(View view) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            unitName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("unitName");
-        }
+        unitName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("unitName");
         spinner1 = view.findViewById(R.id.spinner1);
         spinner2 = view.findViewById(R.id.spinner2);
         editText = view.findViewById(R.id.editTextNumber);
@@ -94,13 +95,34 @@ public class CurrFragment1 extends Fragment {
             }
         });
         textView = view.findViewById(R.id.textView3);
-        Button button = view.findViewById(R.id.buttonConvert);
-        button.setOnClickListener(new View.OnClickListener() {
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                convert();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                convert(s.toString());
             }
         });
+        AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                convert(editText.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+        spinner1.setOnItemSelectedListener(listener);
+        spinner2.setOnItemSelectedListener(listener);
         switch (unitName) {
             case "Distance": {
                 createSpinner(spinner1, unitsDist);
@@ -141,11 +163,11 @@ public class CurrFragment1 extends Fragment {
         model.getOutput().observe(getViewLifecycleOwner(), valueOutput);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(getLayout(), container, false);
         content(view);
         return view;
@@ -158,83 +180,81 @@ public class CurrFragment1 extends Fragment {
     }
 
 
-    public void convert() {
+    public void convert(String s) {
         selected1 = spinner1.getSelectedItem().toString();
         selected2 = spinner2.getSelectedItem().toString();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (!editText.getText().toString().equals("")) {
-                if (Objects.equals(unitName, "Distance")) {
-                    float number = Float.parseFloat(editText.getText().toString());
-                    for (int i = 0; i < 6; i++) {
-                        for (int j = 0; j < 6; j++) {
-                            if (selected1.equals(unitsDist[i]) && selected2.equals(unitsDist[j])) {
-                                if (i == j) {
-                                    textView.setText(String.valueOf(number));
-                                    continue;
-                                }
-                                textView.setText(String.valueOf(number * toMM[i] * (1 / toMM[j])));
+        if (!s.equals("")) {
+            if (Objects.equals(unitName, "Distance")) {
+                float number = Float.parseFloat(editText.getText().toString());
+                for (int i = 0; i < 6; i++) {
+                    for (int j = 0; j < 6; j++) {
+                        if (selected1.equals(unitsDist[i]) && selected2.equals(unitsDist[j])) {
+                            if (i == j) {
+                                textView.setText(String.valueOf(number));
+                                continue;
                             }
+                            textView.setText(String.valueOf(number * toMM[i] * (1 / toMM[j])));
                         }
                     }
                 }
-                else if (Objects.equals(unitName, "Temperature")) {
-                    float number = Float.parseFloat(editText.getText().toString());
-                    if (selected1.equals(unitsTemp[0]) && selected2.equals(unitsTemp[1])) {
-                        textView.setText(String.valueOf(1.8 * number + 32));
-                    }
-                    else if (selected1.equals(unitsTemp[0]) && selected2.equals(unitsTemp[2])) {
-                        textView.setText(String.valueOf(number + 274.15));
-                    }
-                    else if (selected1.equals(unitsTemp[1]) && selected2.equals(unitsTemp[0])) {
-                        textView.setText(String.valueOf((number - 32) * 5 / 9));
-                    }
-                    else if (selected1.equals(unitsTemp[1]) && selected2.equals(unitsTemp[2])) {
-                        textView.setText(String.valueOf((number + 459.67) * 5 / 9));
-                    }
-                    else if (selected1.equals(unitsTemp[2]) && selected2.equals(unitsTemp[0])) {
-                        textView.setText(String.valueOf(number - 274.15));
-                    }
-                    else if (selected1.equals(unitsTemp[2]) && selected2.equals(unitsTemp[1])) {
-                        textView.setText(String.valueOf(number * 1.8 - 459.67));
-                    }
-                    else {
-                        textView.setText(String.valueOf(number));
-                    }
+            }
+            else if (Objects.equals(unitName, "Temperature")) {
+                float number = Float.parseFloat(editText.getText().toString());
+                if (selected1.equals(unitsTemp[0]) && selected2.equals(unitsTemp[1])) {
+                    textView.setText(String.valueOf(1.8 * number + 32));
                 }
-                else if (Objects.equals(unitName, "Weight")) {
-                    float number = Float.parseFloat(editText.getText().toString());
-                    for (int i = 0; i < 6; i++) {
-                        for (int j = 0; j < 6; j++) {
-                            if (selected1.equals(unitsWt[i]) && selected2.equals(unitsWt[j])) {
-                                if (i == j) {
-                                    textView.setText(String.valueOf(number));
-                                    continue;
-                                }
-                                textView.setText(String.valueOf(number * toGr[i] * (1 / toGr[j])));
-                            }
-                        }
-                    }
+                else if (selected1.equals(unitsTemp[0]) && selected2.equals(unitsTemp[2])) {
+                    textView.setText(String.valueOf(number + 274.15));
+                }
+                else if (selected1.equals(unitsTemp[1]) && selected2.equals(unitsTemp[0])) {
+                    textView.setText(String.valueOf((number - 32) * 5 / 9));
+                }
+                else if (selected1.equals(unitsTemp[1]) && selected2.equals(unitsTemp[2])) {
+                    textView.setText(String.valueOf((number + 459.67) * 5 / 9));
+                }
+                else if (selected1.equals(unitsTemp[2]) && selected2.equals(unitsTemp[0])) {
+                    textView.setText(String.valueOf(number - 274.15));
+                }
+                else if (selected1.equals(unitsTemp[2]) && selected2.equals(unitsTemp[1])) {
+                    textView.setText(String.valueOf(number * 1.8 - 459.67));
                 }
                 else {
-                    float number = Float.parseFloat(editText.getText().toString());
-                    for (int i = 0; i < 4; i++) {
-                        for (int j = 0; j < 4; j++) {
-                            if (selected1.equals(unitsCurr[i]) && selected2.equals(unitsCurr[j])) {
-                                if (i == j) {
-                                    textView.setText(String.valueOf(number));
-                                    continue;
-                                }
-                                textView.setText(String.valueOf(number * toUSD[i] * (1 / toUSD[j])));
+                    textView.setText(String.valueOf(number));
+                }
+            }
+            else if (Objects.equals(unitName, "Weight")) {
+                float number = Float.parseFloat(editText.getText().toString());
+                for (int i = 0; i < 6; i++) {
+                    for (int j = 0; j < 6; j++) {
+                        if (selected1.equals(unitsWt[i]) && selected2.equals(unitsWt[j])) {
+                            if (i == j) {
+                                textView.setText(String.valueOf(number));
+                                continue;
                             }
+                            textView.setText(String.valueOf(number * toGr[i] * (1 / toGr[j])));
                         }
                     }
                 }
             }
             else {
-                textView.setText("");
+                float number = Float.parseFloat(editText.getText().toString());
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (selected1.equals(unitsCurr[i]) && selected2.equals(unitsCurr[j])) {
+                            if (i == j) {
+                                textView.setText(String.valueOf(number));
+                                continue;
+                            }
+                            textView.setText(String.valueOf(number * toUSD[i] * (1 / toUSD[j])));
+                        }
+                    }
+                }
             }
-            model.setOutput(textView.getText().toString());
         }
+        else {
+            textView.setText("");
+        }
+        model.setOutput(textView.getText().toString());
     }
 }
 

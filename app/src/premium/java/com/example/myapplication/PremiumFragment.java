@@ -32,7 +32,6 @@ public class PremiumFragment extends CurrFragment1  {
         int pos2 = adapter2.getPosition(spinner2.getSelectedItem().toString());
         spinner1.setSelection(pos2);
         spinner2.setSelection(pos1);
-        convert();
     }
 
     @Override
@@ -51,24 +50,20 @@ public class PremiumFragment extends CurrFragment1  {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    ClipboardManager clipboard = (ClipboardManager) Objects.requireNonNull(getContext()).getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("tag_input", editText.getText().toString());
-                    clipboard.setPrimaryClip(clip);
-                    Toast.makeText(getContext(), "Text copied successfully!", Toast.LENGTH_SHORT).show();
-                }
+                ClipboardManager clipboard = (ClipboardManager) Objects.requireNonNull(getContext()).getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("tag_input", editText.getText().toString());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getContext(), "Text copied successfully!", Toast.LENGTH_SHORT).show();
             }
         });
         ImageButton button2 = view.findViewById(R.id.imageButton4);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    ClipboardManager clipboard = (ClipboardManager) Objects.requireNonNull(getContext()).getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("tag_output", textView.getText().toString());
-                    clipboard.setPrimaryClip(clip);
-                    Toast.makeText(getContext(), "Text copied successfully!", Toast.LENGTH_SHORT).show();
-                }
+                ClipboardManager clipboard = (ClipboardManager) Objects.requireNonNull(getContext()).getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("tag_output", textView.getText().toString());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getContext(), "Text copied successfully!", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

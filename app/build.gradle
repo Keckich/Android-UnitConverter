@@ -19,18 +19,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-/*        debug {
-            debuggable true
-            packageNameSuffix ".debug"
-        }*/
     }
     flavorDimensions "version"
     productFlavors {
         basic {
             applicationIdSuffix ".basic"
+            versionName "1.0-basic"
         }
         premium {
             applicationIdSuffix ".premium"
+            versionName "1.0-premium"
+            minSdkVersion 19
         }
     }
 }
