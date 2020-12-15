@@ -1,5 +1,37 @@
 apply plugin: 'com.android.application'
 
+def getVersionCode = { ->
+    try {
+        def code = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--first-parent', '--count', 'HEAD'
+            standardOutput = code
+        }
+        return Integer.parseInt(code.toString().trim())
+    }
+    catch (ignored) {
+        return 1;
+    }
+}
+
+def getVersionName = { ->
+    try {
+        def code = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--tags'
+            standardOutput = code
+        }
+        return code.toString().trim()
+    }
+    catch (ignored) {
+        return null;
+    }
+}
+task printVC{
+    println getVersionCode()
+    println getVersionName()
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -8,9 +40,8 @@ android {
         applicationId "com.example.myapplication"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        versionCode getVersionCode()
+        versionName getVersionName()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
